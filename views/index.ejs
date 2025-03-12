@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+
+    <title>Danh sách sản phẩm</title>
+</head>
+
+<body>
+    <h1>Danh sách sản phẩm</h1>
+    <ul>
+        <% products.forEach(product => { %>
+            <li>
+                <h3>
+                    <%= product.name %>
+                </h3>
+                <img src="<%= product.image %>" alt="<%= product.name %>" width="300">
+                <p>Giá:
+                    <%= product.price.toLocaleString('vi-VN') %> VND</p>
+                </p>
+                <a href="/product/<%= product._id %>">Xem chi tiết</a>
+                <form action="/cart/add" method="POST">
+                    <input type="hidden" name="productId" value="<%= product._id %>">
+                    <button type="submit">Thêm vào giỏ hàng</button>
+                </form>
+            </li>
+            <% }) %>
+    </ul>
+    <a href="/cart">Xem giỏ hàng</a>
+</body>
+
+</html>

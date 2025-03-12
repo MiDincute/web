@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #fce4ec;
+            color: #333;
+        }
+        
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #d63384;
+            margin-bottom: 30px;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .product-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .product-info img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .product-info h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .product-info p {
+            margin: 5px 0 0;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .remove-item {
+            color: #e63946;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .remove-item:hover {
+            text-decoration: underline;
+        }
+        
+        .cart-total {
+            text-align: right;
+            font-size: 20px;
+            color: #d63384;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        
+        .continue-shopping {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .continue-shopping:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cart-container">
+        <h1>Giỏ hàng của bạn</h1>
+        <% if (cart.length > 0) { %>
+            <% cart.forEach(item => { %>
+                <div class="cart-item">
+                    <div class="product-info">
+                        <img src="<%= item.image %>" alt="<%= item.name %>">
+                        <div>
+                            <h3>
+                                <%= item.name %>
+                            </h3>
+                            <p>
+                                <%= item.price.toLocaleString('vi-VN') %> VND</p>
+                        </div>
+                    </div>
+                    <a href="/cart/remove/<%= item._id %>" class="remove-item">Xóa</a>
+                </div>
+                <% }) %>
+                    <p class="cart-total">Tổng tiền:
+                        <%= totalPrice.toLocaleString('vi-VN') %> VND</p>
+                    <% } else { %>
+                        <p>Giỏ hàng của bạn đang trống.</p>
+                        <% } %>
+                            <a href="/" class="continue-shopping">&#8592; Tiếp tục mua sắm</a>
+    </div>
+</body>
+
+</html>
